@@ -804,15 +804,25 @@ if totaldrivenumber:
 
 		# Adjust print format with width computed above
 		drvfmt = "%-"+str(dlen+6)+"s | %-4s | %-"+str(mlen)+"s | %-8s | %-"+str(flen)+"s | %-8s | %-4s | %-8s | %-8s"
+		drvfmt_h  = "\033[1m%-"+str(dlen+6)+u"s \u2502 " + \
+					u"%-4s \u2502 " + \
+					"%-"+str(mlen)+u"s \u2502 " + \
+					u"%-8s \u2502 " + \
+					"%-"+str(flen)+u"s \u2502 " + \
+					u"%-8s \u2502 " + \
+					u"%-4s \u2502 " + \
+					u"%-8s \u2502 " + \
+					"%-8s\033[0m"
+		drvfmt_c  = "\033[1;30m%-"+str(dlen+6)+"s "+u"\u2502 "+"%-4s "+u"\u2502 "+"\033[1;30m%-"+str(mlen)+"s\033[0m "+u"\u2502 "+"%-8s "+u"\u2502 "+"%-"+str(flen)+"s "+u"\u2502 "+"%-8s "+u"\u2502 "+"%-4s "+u"\u2502 "+"%-8s "+u"\u2502 "+"%-8s"
 		for array in arraydisk:
 			# Header
 			if ( i == 0 ):
 				if not nagiosmode:
-					print drvfmt % (
-					"-- ID", "Type", "Drive Model", "Size", "Status", "Speed", "Temp", "Slot ID", "LSI ID")
+					print drvfmt_h % (
+					u"\u2014\u2014 ID  ", "Type", "Drive Model", "Size", "Status", "Speed", "Temp", "Slot ID", "LSI ID\033[0m")
 			# Drive information
 			if not nagiosmode:
-				print drvfmt % (
+				print drvfmt_c % (
 					str('c'+str(controllerid)+'u'+array[0]+'p'+array[1]),		# c0p0
 					array[2],							# HDD/SDD
 					array[3],							# Model Information (Variable len)
