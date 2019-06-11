@@ -53,6 +53,7 @@ if __name__ == '__main__':
 	group.add_argument('--nagios', help='enable nagios support',   action='store_true')
 	group.add_argument('--debug',  help='enable debugging output', action='store_true')
 	group.add_argument('--notemp', help='disable temperature reporting', action='store_true')
+	group.add_argument('--testbin',help='path to fake "megacli" test program', action='store')
 
 	args = parser.parse_args()
 	nagisomode = args.nagios
@@ -102,6 +103,8 @@ def which(program):
 for megabin in "MegaCli64","MegaCli","megacli", "MegaCli.exe", "perccli64", "perccli", "storcli64", "storcli":
 	dbgprint ('Looking for '+str(megabin)+' in PATH...')
 	megaclipath = which(megabin)
+	if (args.testbin != None):
+		megaclipath = which(args.testbin)
 	if (megaclipath != None):
 		dbgprint ('Will use this executable: '+str(megaclipath))
 		break
