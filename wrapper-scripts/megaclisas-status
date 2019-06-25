@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python # -*- flycheck-python-flake8-executable: "python3"; flycheck-flake8rc: "../.flake8" -*-
 # $Id: megaclisas-status,v 1.78 2018/10/01 03:52:57 root Exp root $
 #
 # Written by Adam Cecile <gandalf@NOSPAM.le-vert.net>

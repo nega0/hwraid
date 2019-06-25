@@ -1,0 +1,14 @@
+[flake8]
+
+ignore = E501,  # ignore long-lines error
+         E266,  # ignore "too many # leading comment"
+         E265,  # ignore "comments should start with "# ""
+         W503,  # oboslete, W504 is current best practice
+
+exclude = .git,packaging
+
+per-file-ignores =
+    args.py:E221,E241
+    megaclisas-status:E203,E241,E702
+# flycheck feeds files to flak8 via stdin
+    stdin:E203,E241,E702
