@@ -599,7 +599,7 @@ bad = False
 if printcontroller:
 	if controllernumber:
 		if not nagiosmode:
-			print '-- Controller information --'
+			print u'\u2014\u2014 Controller information \u2014\u2014'
 
 		i = 0
 		controllerid = 0
@@ -618,7 +618,7 @@ if printcontroller:
 			# Header
 			if ( i == 0 ):
 				if not nagiosmode:
-					print hbafmt % ("-- ID","H/W Model","RAM","Temp","BBU", "Firmware")
+					print hbafmt % (u"\u2014\u2014 ID","H/W Model","RAM","Temp","BBU", "Firmware")
 			if not nagiosmode:
 				print hbafmt % (
 					hba[0],
@@ -636,7 +636,7 @@ if printcontroller:
 
 if printarray:
 	if not nagiosmode:
-		print '-- Array information --'
+		print u'\033[1m\u2014\u2014 Array information \u2014\u2014\033[0m'
 
 	controllerid = 0
 	pcipath = ''
@@ -720,7 +720,7 @@ if printarray:
 			# Header
 			if ( i == 0 ):
 				if not nagiosmode:
-					print ldfmt % ("-- ID", "Type", "Size", "Strpsz", "Flags", "DskCache", "Status", "OS Path", "CacheCade", "InProgress" )
+					print ldfmt % (u"\u2014\u2014 ID", "Type", "Size", "Strpsz", "Flags", "DskCache", "Status", "OS Path", "CacheCade", "InProgress" )
 			if not nagiosmode:
 				print ldfmt % (
 					arrayinfo[0],
@@ -754,7 +754,7 @@ while controllerid < controllernumber:
 
 if totaldrivenumber:
 	if not nagiosmode:
-		print '-- Disk information --'
+		print u'\033[1m\u2014\u2014 Disk information \u2014\u2014\033[0m'
 
 	i = 0
 	dlen = 0 ; mlen = 0 ; flen = 0
@@ -819,7 +819,7 @@ if totaldrivenumber:
 			if ( i == 0 ):
 				if not nagiosmode:
 					print drvfmt_h % (
-					u"\u2014\u2014 ID  ", "Type", "Drive Model", "Size", "Status", "Speed", "Temp", "Slot ID", "LSI ID\033[0m")
+					u"\u2014\u2014 ID  ", "Type", "Drive Model", "Size", "Status", "Speed", "Temp", "Slot ID", "LSI ID")
 			# Drive information
 			if not nagiosmode:
 				print drvfmt_c % (
@@ -865,7 +865,7 @@ dbgprint('Total Unconfigured Drives : ' + str(totalunconfdrivenumber))
 
 if totalunconfdrivenumber:
 	if not nagiosmode:
-		print '-- Unconfigured Disk information --'
+		print u'\033[1m\u2014\u2014 Unconfigured Disk information \u2014\u2014\033[0m'
 
 	controllerid = 0
 	pcipath = ''
@@ -918,7 +918,7 @@ if totalunconfdrivenumber:
 			if ( i == 0 ):
 				if not nagiosmode:
 					print drvfmt % (
-					"-- ID", "Type", "Drive Model", "Size", "Status", "Speed", "Temp", "Slot ID", "LSI ID", "Path")
+					u"\u2014\u2014 ID", "Type", "Drive Model", "Size", "Status", "Speed", "Temp", "Slot ID", "LSI ID", "Path")
 			# Drive information
 			if not nagiosmode:
 				print drvfmt % (
