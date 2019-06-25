@@ -1,0 +1,9 @@
+[flake8]
+ignore = E501,  # ignore long-lines error
+         E266,  # ignore "too many # leading comment"
+
+exclude = .git,packaging
+
+per-file-ignores =
+    args.py:E221,E241
+    wrapper-scripts/megaclisas-status:E702
