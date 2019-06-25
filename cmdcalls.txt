@@ -1,0 +1,16 @@
+/usr/sbin/megacli -adpCount -NoLog
+/usr/sbin/megacli -AdpAllInfo -a0 -NoLog
+/usr/sbin/megacli -LDInfo -lall -a0 -NoLog
+/usr/sbin/megacli -LDInfo -l0 -a0 -NoLog
+/usr/sbin/megacli -LDInfo -l0 -a0 -NoLog
+/usr/sbin/megacli -AdpGetPciInfo -a0 -NoLog
+/usr/sbin/megacli -LDInfo -lall -a0 -NoLog
+/usr/sbin/megacli -LDInfo -l0 -a0 -NoLog
+/usr/sbin/megacli -PDGetNum -a0 -NoLog
+/usr/sbin/megacli -LDInfo -lall -a0 -NoLog
+/usr/sbin/megacli -LdPdInfo -a0 -NoLog
+/usr/sbin/megacli -LDInfo -lall -a0 -NoLog
+/usr/sbin/megacli -LdPdInfo -a0 -NoLog
+/usr/sbin/megacli -LdPdInfo -a0 -NoLog
+/usr/sbin/megacli -PDGetNum -a0 -NoLog
+/usr/sbin/megacli -PDList -a0 -NoLog
