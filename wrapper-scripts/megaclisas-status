@@ -443,9 +443,9 @@ def returnArrayInfo(output, controllerid, arrayid, arrayindex):
                 raidtype = str('RAID-' + str(raidlvl))
 
     dbgprint('RAID Level: ' + str(raidlvl)
-        + ' Span Depth: ' + str(spandepth)
-        + ' Disk Per Span: ' + str(diskperspan)
-        + ' Raid Type: ' + str(raidtype))
+             + ' Span Depth: ' + str(spandepth)
+             + ' Disk Per Span: ' + str(diskperspan)
+             + ' Raid Type: ' + str(raidtype))
     return [id, raidtype, size, strpsz, properties, dskcache, state, targetid, cachecade_info, inprogress]
 
 
@@ -841,7 +841,7 @@ if totaldrivenumber:
             if (i == 0):
                 if not nagiosmode:
                     print drvfmt % (
-                    "-- ID", "Type", "Drive Model", "Size", "Status", "Speed", "Temp", "Slot ID", "LSI ID")
+                        "-- ID", "Type", "Drive Model", "Size", "Status", "Speed", "Temp", "Slot ID", "LSI ID")
             # Drive information
             if not nagiosmode:
                 print drvfmt % (
@@ -940,7 +940,7 @@ if totalunconfdrivenumber:
             if (i == 0):
                 if not nagiosmode:
                     print drvfmt % (
-                    "-- ID", "Type", "Drive Model", "Size", "Status", "Speed", "Temp", "Slot ID", "LSI ID", "Path")
+                        "-- ID", "Type", "Drive Model", "Size", "Status", "Speed", "Temp", "Slot ID", "LSI ID", "Path")
             # Drive information
             if not nagiosmode:
                 print drvfmt % (
