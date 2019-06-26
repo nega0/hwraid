@@ -76,7 +76,7 @@ if len(sys.argv) > 1:
 # Functions
 def dbgprint(msg):
     if (debugmode):
-        sys.stderr.write (str('# DEBUG (' + str(inspect.currentframe().f_back.f_lineno) + ') : ' + msg + '\n'))
+        sys.stderr.write(str('# DEBUG (' + str(inspect.currentframe().f_back.f_lineno) + ') : ' + msg + '\n'))
 
 def is_exe(fpath):
     return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
@@ -96,20 +96,20 @@ def which(program):
         os.environ["PATH"] += os.pathsep + '/opt/lsi/storcli'
         os.environ["PATH"] += os.pathsep + os.path.dirname(os.path.realpath(sys.argv[0]))
         for path in os.environ["PATH"].split(os.pathsep):
-            dbgprint ('Looking in PATH ' + str(path))
+            dbgprint('Looking in PATH ' + str(path))
             path = path.strip('"')
             exe_file = os.path.join(path, program)
             if is_exe(exe_file):
-                dbgprint ('Found "' + program + '" at ' + exe_file)
+                dbgprint('Found "' + program + '" at ' + exe_file)
                 return exe_file
     return None
 
 # Find MegaCli
 for megabin in "MegaCli64","MegaCli","megacli", "MegaCli.exe", "perccli64", "perccli", "storcli64", "storcli":
-    dbgprint ('Looking for ' + str(megabin) + ' in PATH...')
+    dbgprint('Looking for ' + str(megabin) + ' in PATH...')
     megaclipath = which(megabin)
     if (megaclipath != None):
-        dbgprint ('Will use this executable: ' + str(megaclipath))
+        dbgprint('Will use this executable: ' + str(megaclipath))
         break
 
 # Check binary exists (and +x), if not print an error message
@@ -140,10 +140,10 @@ def returnWdthFromArrayCol(glarray,idx):
 def getOutput(cmd):
     lines = []
     if (Outputs.has_key(cmd)):
-        dbgprint ("Got Cached value: " + str(cmd))
+        dbgprint("Got Cached value: " + str(cmd))
         lines = Outputs[cmd]
     else:
-        dbgprint ("Not a Cached value: " + str(cmd))
+        dbgprint("Not a Cached value: " + str(cmd))
         output = os.popen(cmd)
         for line in output:
             if not re.match(r'^$',line.strip()):
@@ -155,10 +155,10 @@ def getOutput(cmd):
 def AddDisk(mytable,disk):
     lines = []
     if (mytable.has_key(disk)):
-        dbgprint ("Disk: " + str(disk) + " Already present in Disk Table")
+        dbgprint("Disk: " + str(disk) + " Already present in Disk Table")
         return False
     else:
-        dbgprint ("Confed " + str(nagiosgooddisk) + '/' + str(nagiosbaddisk) + "Disk: " + str(disk) + " Not already present in Disk Table, adding")
+        dbgprint("Confed " + str(nagiosgooddisk) + '/' + str(nagiosbaddisk) + "Disk: " + str(disk) + " Not already present in Disk Table, adding")
         mytable[disk] = True
         return True
 
@@ -661,7 +661,7 @@ if printarray:
                 if re.match(r'^Adapter.*Virtual Drive .* Does not Exist',line.strip()):
                     ldid += 1
                 elif re.match(r'^(CacheCade )?Virtual Drive:',line.strip()):
-                    LDTable[controllerid].append (ldid)
+                    LDTable[controllerid].append(ldid)
                     #NestedLDTable[controllerid][int(arrayindex)] = False
                     ldcount += 1
                     ldid += 1
@@ -701,7 +701,7 @@ if printarray:
                 diskprefix = str('/dev/disk/by-path/pci-' + pcipath + '-scsi-0:')
                 dbgprint('Will look for DISKprefix : ' + diskprefix)
                 # RAID disks are usually with a channel of '2', JBOD disks with a channel of '0'
-                for j in range (1, 8):
+                for j in range(1, 8):
                     diskpath = diskprefix + str(j) + ':' + str(arrayinfo[7]) + ':0'
                     dbgprint('Looking for DISKpath : ' + diskpath)
                     if os.path.exists(diskpath):
@@ -931,17 +931,17 @@ if totalunconfdrivenumber:
         print ''
 
 if (debugmode):
-    dbgprint ('Printing Outputs[][]')
+    dbgprint('Printing Outputs[][]')
     for myl in Outputs:
         dbgprint(myl + '\n')
         sys.stderr.write("\n".join("".join(map(str,myd)) for myd in Outputs[myl]) + '\n')
-    dbgprint ('Printing arraydisk[]')
+    dbgprint('Printing arraydisk[]')
     sys.stderr.write("\n".join(" | ".join(map(str,myd)) for myd in arraydisk) + '\n')
-    dbgprint ('Printing ConfDisks[]')
+    dbgprint('Printing ConfDisks[]')
     sys.stderr.write("\n".join("".join(map(str,myd)) for myd in ConfDisks) + '\n')
-    dbgprint ('Printing NagiosGoodDisks[]')
+    dbgprint('Printing NagiosGoodDisks[]')
     sys.stderr.write("\n".join("".join(map(str,myd)) for myd in NagiosGoodDisks) + '\n')
-    dbgprint ('Printing NagiosBadDisks[]')
+    dbgprint('Printing NagiosBadDisks[]')
     sys.stderr.write("\n".join("".join(map(str,myd)) for myd in NagiosBadDisks) + '\n')
 
 if nagiosmode:
