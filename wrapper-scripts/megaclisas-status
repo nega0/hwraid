@@ -111,7 +111,7 @@ for megabin in "MegaCli64","MegaCli","megacli", "MegaCli.exe", "perccli64", "per
 	if (megaclipath != None):
 		dbgprint ('Will use this executable: '+str(megaclipath))
 		break
-	
+
 # Check binary exists (and +x), if not print an error message
 if (megaclipath != None):
 	if os.path.exists(megaclipath) and os.access(megaclipath, os.X_OK):
@@ -150,7 +150,7 @@ def getOutput(cmd):
 				lines.append(line.strip())
 		Outputs[cmd] = lines
 	return lines
- 
+
 # Get and cache disks, make sure we don't count the same disk twice
 def AddDisk(mytable,disk):
 	lines = []
