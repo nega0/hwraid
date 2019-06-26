@@ -45,8 +45,11 @@ NagiosBadDisks = {}
 NagiosGoodDisks = {}
 
 # Startup
+
+
 def print_usage():
     print 'Usage: megaraid-status [--nagios|--debug|--notemp]'
+
 
 # We need root access to query
 if __name__ == '__main__':
@@ -74,12 +77,16 @@ if len(sys.argv) > 1:
         print_usage()
         sys.exit(1)
 # Functions
+
+
 def dbgprint(msg):
     if (debugmode):
         sys.stderr.write(str('# DEBUG (' + str(inspect.currentframe().f_back.f_lineno) + ') : ' + msg + '\n'))
 
+
 def is_exe(fpath):
     return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
+
 
 def which(program):
     import os
@@ -103,6 +110,7 @@ def which(program):
                 dbgprint('Found "' + program + '" at ' + exe_file)
                 return exe_file
     return None
+
 
 # Find MegaCli
 for megabin in "MegaCli64", "MegaCli", "megacli", "MegaCli.exe", "perccli64", "perccli", "storcli64", "storcli":
@@ -137,6 +145,8 @@ def returnWdthFromArrayCol(glarray, idx):
     return maxwdth
 
 # Get and cache command output
+
+
 def getOutput(cmd):
     lines = []
     if (Outputs.has_key(cmd)):
@@ -152,6 +162,8 @@ def getOutput(cmd):
     return lines
 
 # Get and cache disks, make sure we don't count the same disk twice
+
+
 def AddDisk(mytable, disk):
     lines = []
     if (mytable.has_key(disk)):
@@ -162,15 +174,18 @@ def AddDisk(mytable, disk):
         mytable[disk] = True
         return True
 
+
 def returnControllerNumber(output):
     for line in output:
         if re.match(r'^Controller Count.*$', line.strip()):
             return int(line.split(':')[1].strip().strip('.'))
 
+
 def returnTotalDriveNumber(output):
     for line in output:
         if re.match(r'Number of Physical Drives on Adapter.*$', line.strip()):
             return int(line.split(':')[1].strip())
+
 
 def returnRebuildProgress(output):
     percent = 0
@@ -180,6 +195,7 @@ def returnRebuildProgress(output):
             tmpstr = line.split('Completed')[1].strip()
             percent = int(tmpstr.split('%')[0].strip())
     return percent
+
 
 def returnConfDriveNumber(controllerid, output):
     # Count the configured drives
@@ -195,6 +211,7 @@ def returnConfDriveNumber(controllerid, output):
                 confdrives += 1
     return int(confdrives)
 
+
 def returnUnConfDriveNumber(output):
     # Count the un-configured/Hotspare drives
     unconfdrives = 0
@@ -205,20 +222,24 @@ def returnUnConfDriveNumber(output):
             unconfdrives += 1
     return int(unconfdrives)
 
+
 def returnControllerModel(output):
     for line in output:
         if re.match(r'^Product Name.*$', line.strip()):
             return line.split(':')[1].strip()
+
 
 def returnMemorySize(output):
     for line in output:
         if re.match(r'^Memory Size.*$', line.strip()):
             return line.split(':')[1].strip()
 
+
 def returnFirmwareVersion(output):
     for line in output:
         if re.match(r'^FW Package Build.*$', line.strip()):
             return line.split(':')[1].strip()
+
 
 def returnROCTemp(output):
     ROCtemp = ''
@@ -235,6 +256,7 @@ def returnROCTemp(output):
         else:
             return str('N/A')
 
+
 def returnBBUPresence(output):
     BBU = ''
     tmpstr = ''
@@ -247,6 +269,7 @@ def returnBBUPresence(output):
         return str(BBU)
     else:
         return str('N/A')
+
 
 def returnBBUStatus(output):
     BBUStatus = ''
@@ -261,12 +284,14 @@ def returnBBUStatus(output):
     else:
         return str('Good')
 
+
 def returnArrayNumber(output):
     i = 0
     for line in output:
         if re.match(r'^(CacheCade )?Virtual Drive:.*$', line.strip()):
             i += 1
     return i
+
 
 def returnHBAPCIInfo(output):
     busprefix = '0000'
@@ -288,6 +313,7 @@ def returnHBAPCIInfo(output):
     else:
         return None
 
+
 def returnHBAInfo(table, output, controllerid):
     controllermodel = 'Unknown'
     controllerram = 'Unknown'
@@ -305,6 +331,7 @@ def returnHBAInfo(table, output, controllerid):
 
     if controllermodel != 'Unknown':
         table.append(['c' + str(controllerid), controllermodel, controllerram, str(controllertemp), str(controllerbbu), str('FW: ' + controllerrev)])
+
 
 def returnArrayInfo(output, controllerid, arrayid, arrayindex):
     id = 'c' + str(controllerid) + 'u' + str(arrayid)
@@ -420,6 +447,7 @@ def returnArrayInfo(output, controllerid, arrayid, arrayindex):
         + ' Disk Per Span: ' + str(diskperspan)
         + ' Raid Type: ' + str(raidtype))
     return [id, raidtype, size, strpsz, properties, dskcache, state, targetid, cachecade_info, inprogress]
+
 
 def returnDiskInfo(output, controllerid):
     arrayid = False
@@ -591,6 +619,7 @@ def returnUnconfDiskInfo(output, controllerid):
                     dbgprint('Online Unconfed Disk: Arrayid: ' + str(arrayid) + ' DiskId: ' + str(diskid) + ' ' + str(olddiskid) + ' ' + str(fstate))
                 table.append([mtype, model, dsize, fstate, speed, temp, enclid, slotid, diskid, ospath])
     return table
+
 
 cmd = '%s -adpCount -NoLog' % (megaclipath)
 output = getOutput(cmd)
