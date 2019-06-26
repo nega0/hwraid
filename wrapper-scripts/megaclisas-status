@@ -561,7 +561,7 @@ def returnUnconfDiskInfo(output, controllerid):
     ospath = 'N/A'
     for line in output:
         if re.match(r'Enclosure Device ID: .*$', line.strip()):
-        # We match here early in the analysis so reset the vars if this is a new disk we're reading..
+            # We match here early in the analysis so reset the vars if this is a new disk we're reading..
             oldenclid = enclid
             enclid = line.split(':')[1].strip().replace("N/A", "")
             if oldenclid != False:
