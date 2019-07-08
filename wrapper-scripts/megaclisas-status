@@ -167,7 +167,7 @@ def getOutput(cmd):
 
 
 def AddDisk(mytable, disk):
-    lines = []
+    lines = []                            # noqa: F841
     if (mytable.has_key(disk)):
         dbgprint("Disk: " + str(disk) + " Already present in Disk Table")
         return False
@@ -463,7 +463,7 @@ def returnDiskInfo(output, controllerid):
     lsidid = 'Unknown'
     table = []
     fstate = 'Offline'
-    substate = 'Unknown'
+    substate = 'Unknown'                  # noqa: F841
     model = 'Unknown'
     speed = 'Unknown'
     dsize = 'Unknown'
@@ -492,7 +492,7 @@ def returnDiskInfo(output, controllerid):
             arrayindex += 1
             arrayid = line.split('(')[0].split(':')[1].strip()
         elif re.match(r'^Drive.s posi*tion: DiskGroup: [0-9]+,.*$', line.strip()):
-            notarrayid = line.split(',')[1].split(':')[1].strip()
+            notarrayid = line.split(',')[1].split(':')[1].strip()   # noqa: F841
         elif re.match(r'PD: [0-9]+ Information.*$', line.strip()):
             diskid = line.split()[1].strip()
         elif re.match(r'^Device Id: .*$', line.strip()):
@@ -510,7 +510,7 @@ def returnDiskInfo(output, controllerid):
             manuf = re.sub(' .*', '', model)
             dtype = re.sub(manuf + ' ', '', model)
             dtype = re.sub(' .*', '', dtype)
-            hwserial = re.sub('.*' + dtype + ' *', '', model)
+            hwserial = re.sub('.*' + dtype + ' *', '', model)   # noqa: F841
         elif re.match(r'^Media Type: .*$', line.strip()):
             mtype = line.split(':')[1].strip()
             if mtype == 'Hard Disk Device':
@@ -554,7 +554,7 @@ def returnUnconfDiskInfo(output, controllerid):
     lsidid = 'Unknown'
     table = []
     fstate = 'Offline'
-    substate = 'Unknown'
+    substate = 'Unknown'                  # noqa: F841
     model = 'Unknown'
     speed = 'Unknown'
     mtype = 'Unknown'
@@ -573,7 +573,7 @@ def returnUnconfDiskInfo(output, controllerid):
                 speed = 'Unknown'
                 temp = 'Unk0C'
                 slotid = False
-                lsidid = 'Unknown'
+                lsidid = 'Unknown'        # noqa: F841
 
         elif re.match(r'^Coerced Size: ', line.strip()):
             dsize = line.split(':')[1].strip()
@@ -595,7 +595,7 @@ def returnUnconfDiskInfo(output, controllerid):
             manuf = re.sub(' .*', '', model)
             dtype = re.sub(manuf + ' ', '', model)
             dtype = re.sub(' .*', '', dtype)
-            hwserial = re.sub('.*' + dtype + ' *', '', model)
+            hwserial = re.sub('.*' + dtype + ' *', '', model)   # noqa: F841
         elif re.match(r'^Media Type: .*$', line.strip()):
             mtype = line.split(':')[1].strip()
             if mtype == 'Hard Disk Device':
