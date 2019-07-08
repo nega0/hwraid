@@ -118,12 +118,12 @@ def which(program):
 for megabin in "MegaCli64", "MegaCli", "megacli", "MegaCli.exe", "perccli64", "perccli", "storcli64", "storcli":
     dbgprint('Looking for ' + str(megabin) + ' in PATH...')
     megaclipath = which(megabin)
-    if (megaclipath != None):
+    if (megaclipath is not None):
         dbgprint('Will use this executable: ' + str(megaclipath))
         break
 
 # Check binary exists (and +x), if not print an error message
-if (megaclipath != None):
+if (megaclipath is not None):
     if os.path.exists(megaclipath) and os.access(megaclipath, os.X_OK):
         pass
     else:
@@ -477,7 +477,7 @@ def returnDiskInfo(output, controllerid):
             # We match here early in the analysis so reset the vars if this is a new disk we're reading..
             oldenclid = enclid
             enclid = line.split(':')[1].strip().replace("N/A", "")
-            if oldenclid != False:
+            if (oldenclid is not False):
                 fstate = 'Offline'
                 model = 'Unknown'
                 speed = 'Unknown'
@@ -537,7 +537,7 @@ def returnDiskInfo(output, controllerid):
                     percent = returnRebuildProgress(output)
                     fstate = str('Rebuilding (%d%%)' % (percent))
 
-                if ((NestedLDTable[controllerid][int(arrayindex)] == True) and (spanid != False)):
+                if ((NestedLDTable[controllerid][int(arrayindex)] is True) and (spanid is not False)):
                     sarrayid = str(arrayid) + "s" + spanid
                 else:
                     sarrayid = str(arrayid)
@@ -566,7 +566,7 @@ def returnUnconfDiskInfo(output, controllerid):
             # We match here early in the analysis so reset the vars if this is a new disk we're reading..
             oldenclid = enclid
             enclid = line.split(':')[1].strip().replace("N/A", "")
-            if oldenclid != False:
+            if (oldenclid is not False):
                 arrayid = False
                 fstate = 'Offline'
                 model = 'Unknown'
@@ -614,7 +614,7 @@ def returnUnconfDiskInfo(output, controllerid):
             else:
                 temp = line.split(':')[1].strip()
                 temp = re.sub('\(.*\)', '', temp)
-            if arrayid == False:
+            if (arrayid is False):
                 if subfstate == 'Unconfigured':
                     dbgprint('Unconfigured Disk: Arrayid: ' + str(arrayid) + ' DiskId: ' + str(diskid) + ' ' + str(olddiskid) + ' ' + str(fstate))
                 elif subfstate == 'Online, Spun Up':
